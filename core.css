@@ -9,23 +9,65 @@ body, table {
     clear: both;
 }
 
-#header{
-	
+#header {
 }
 
 #page-title {
     font-family: Georgia, Times;
     font-size: 1.3em;
     padding: 1em;
-	float : left;
+    float: left;
 }
 
 #navigation-bar {
     list-style-type: none;
-	float : right;
+    float: right;
 }
 
 #navigation-bar li {
-	display : inline;
+    display: inline;
 }
 
+.project-list {
+    list-style-type: none;
+    display: inline;
+}
+
+.project-list {
+    list-style-type: none;
+	display : block;
+}
+
+.project-item {
+    float: left;
+    text-align: left;
+    border: #CCCCCC SOLID 2px;
+    margin: 0.5em;
+	max-width : 300px;
+}
+
+.project-item a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+	background-color : #FFFFFF;
+}
+
+.project-item a:hover{
+	background-color : #EEEEEE;
+}
+
+.project-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333333;
+    display: block;
+    padding: 0.2em 1em 0.2em 0.5em;
+}
+
+.project-description {
+    clear: both;
+    display: block;
+    text-align: justify;
+	padding : 0.5em;
+}

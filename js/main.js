@@ -2,8 +2,11 @@ $(document).ready(function(){
 
     $.extend({
         "urlHelper": {
-            "navigateTo": function(location){
+            setLocation: function(location){
                 document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
+            },
+            getLocation: function(){
+                return document.location.href.split(/[?#]/)[1];
             }
         }
     });
@@ -25,7 +28,7 @@ var Page = {
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
                 if (status === "success") {
                     var func = me.sections[cur.attr("name")];
-                    $.urlHelper.navigateTo(cur.attr("name"));
+                    $.urlHelper.setLocation(cur.attr("name"));
                     if (func && typeof(func) === "function") {
                         func.call(me);
                     }
