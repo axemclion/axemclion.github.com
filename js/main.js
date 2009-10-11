@@ -1,4 +1,12 @@
 $(document).ready(function(){
+
+    $.extend({
+        "urlHelper": {
+            "navigateTo": function(location){
+                document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
+            }
+        }
+    });
     if (top.location != window.location) {
         top.location = window.location;
     }
@@ -16,7 +24,8 @@ var Page = {
             var cur = $(this);
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
                 if (status === "success") {
-                    var func = me[cur.attr("name")];
+                    var func = me.sections[cur.attr("name")];
+                    $.urlHelper.navigateTo(cur.attr("name"));
                     if (func && typeof(func) === "function") {
                         func.call(me);
                     }
@@ -29,11 +38,13 @@ var Page = {
         });
     },
     
-    projects: function(){
-        this.initializeLinks();
+    sections: {
+        projects: function(){
+            this.initializeLinks();
+        },
+        aboutMe: function(){
+        },
+        aboutSite: function(){
+        }
     },
-    aboutMe: function(){
-    },
-    aboutSite: function(){
-    }
 };

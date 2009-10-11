@@ -5,5 +5,27 @@ body, table {
     padding: 0;
 }
 
-#page-title {
+.clear {
+    clear: both;
 }
+
+#header{
+	
+}
+
+#page-title {
+    font-family: Georgia, Times;
+    font-size: 1.3em;
+    padding: 1em;
+	float : left;
+}
+
+#navigation-bar {
+    list-style-type: none;
+	float : right;
+}
+
+#navigation-bar li {
+	display : inline;
+}
+
