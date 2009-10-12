@@ -6,7 +6,10 @@ $(document).ready(function(){
                 document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
             },
             getLocation: function(){
-                return document.location.href.split(/[?#]/)[1];
+                return document.location.href.split(/[?#]/g)[1];
+            },
+            getArgs: function(){
+                return document.location.href.split(/[?#]/g).slice(2).join("");
             }
         }
     });
@@ -21,17 +24,19 @@ var Page = {
         this.initializeLinks();
     },
     
-    initializeLinks: function(){
+    initializeLinks: function(target){
         var me = this;
-        $(".inline-load").click(function(){
+        if (!target) {
+            target = document.body;
+        }
+        
+        $(target).find(".inline-load").click(function(){
             var cur = $(this);
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
                 if (status === "success") {
-                    var func = me.sections[cur.attr("name")];
                     $.urlHelper.setLocation(cur.attr("name"));
-                    if (func && typeof(func) === "function") {
-                        func.call(me);
-                    }
+                    me.initializeLinks("#" + cur.attr("target"));
+                    me.onModuleLoad();
                 }
                 else {
                     $("#" + cur.attr("target")).load("notfound.html");
@@ -41,13 +46,23 @@ var Page = {
         });
     },
     
-    sections: {
-        projects: function(){
-            this.initializeLinks();
-        },
-        aboutMe: function(){
-        },
-        aboutSite: function(){
+    onModuleLoad: function(){
+        var me = this;
+        var moduleName = $.urlHelper.getLocation();
+        if (this.modules[moduleName] && typeof(this.modules[moduleName]) === "function") {
+            this.modules[moduleName].call(me, $.urlHelper.getArgs());
         }
     },
+    
+    modules: {
+        "projects": function(args){
+            if (args != "") {
+                $(".project-description").fadeOut();
+                $(".project-list").addClass(".project-list-single");
+            }
+            else {
+                $(".project-list").removeClass(".project-list-single");
+            }
+        }
+    }
 };

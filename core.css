@@ -30,12 +30,15 @@ body, table {
 
 .project-list {
     list-style-type: none;
-    display: inline;
+    display: block;
 }
 
-.project-list {
-    list-style-type: none;
-	display : block;
+.project-list-single {
+    width: 30%;
+}
+
+.project-list-single li {
+    display: block;
 }
 
 .project-item {
@@ -43,18 +46,18 @@ body, table {
     text-align: left;
     border: #CCCCCC SOLID 2px;
     margin: 0.5em;
-	max-width : 300px;
+    max-width: 300px;
 }
 
 .project-item a {
     text-decoration: none;
     color: #000000;
     display: block;
-	background-color : #FFFFFF;
+    background-color: #FFFFFF;
 }
 
-.project-item a:hover{
-	background-color : #EEEEEE;
+.project-item a:hover {
+    background-color: #EEEEEE;
 }
 
 .project-name {
@@ -69,5 +72,5 @@ body, table {
     clear: both;
     display: block;
     text-align: justify;
-	padding : 0.5em;
+    padding: 0.5em;
 }
