@@ -10,22 +10,53 @@ body, table {
 }
 
 #header {
+    height: 15%;
+    min-height: 85px;
 }
 
 #page-title {
-    font-family: Georgia, Times;
-    font-size: 1.3em;
-    padding: 1em;
-    float: left;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: Garamond, Georgia, Times;
+    font-size: 2em;
+    padding: 0.3em;
+    text-shadow: 0 0 10px;
 }
 
 #navigation-bar {
     list-style-type: none;
-    float: right;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+    background-color: #CCCCCC;
+    border-bottom: SOLID 1px #333333;
 }
 
 #navigation-bar li {
     display: inline;
+    border-left: SOLID 1px #ffffff;
+    border-right: SOLID 1px #CCCCCC;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation-bar a {
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    text-decoration: none;
+    color: #000000;
+    display: inline-block;
+}
+
+#navigation-bar a:hover {
+    text-decoration: underline;
+}
+
+#content {
+    height: 79%;
+    overflow: auto;
+    background-color: #FFFFFF;
+    color: #000000;
 }
 
 .project-list {
@@ -34,11 +65,29 @@ body, table {
 }
 
 .project-list-single {
-    width: 30%;
+    width: 28%;
+    float: left;
+    height: 100%;
 }
 
-.project-list-single li {
+.project-list-single div {
     display: block;
+    border: none;
+    width: 100%;
+    margin: 0;
+    font-weight: normal;
+    border-left: SOLID 1px #CCCCCC;
+}
+
+.project-list-single span {
+    font-size: 1em;
+    font-weight: normal;
+    color: #000000;
+}
+
+#projectContent {
+    width: 70%;
+    float: left;
 }
 
 .project-item {
@@ -60,17 +109,42 @@ body, table {
     background-color: #EEEEEE;
 }
 
-.project-name {
+.project {
+    padding: 1em;
+}
+
+.project-name, .project-title {
     font-size: 1.2em;
-    font-weight: bold;
     color: #333333;
     display: block;
     padding: 0.2em 1em 0.2em 0.5em;
+    color: #408DFB;
 }
 
-.project-description {
+.project-title {
+    width: 100%;
+    text-decoration: underline;
+    padding: 0 0 1em 0;
+}
+
+.project-tweet {
     clear: both;
     display: block;
     text-align: justify;
     padding: 0.5em;
+    font-size: 0.9em;
+}
+
+#footer {
+    background-color: #000000;
+    color: #EEEEEE;
+    text-align: center;
+    padding: 0.3em;
+    font-size: 0.8em;
+    height: 5%;
+}
+
+#footer a {
+    text-decoration: none;
+    color: #408DFB;
 }

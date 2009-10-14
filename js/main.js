@@ -57,11 +57,11 @@ var Page = {
     modules: {
         "projects": function(args){
             if (args != "") {
-                $(".project-description").fadeOut();
-                $(".project-list").addClass(".project-list-single");
+                $(".project-tweet").hide();
+                $(".project-list").addClass("project-list-single");
             }
             else {
-                $(".project-list").removeClass(".project-list-single");
+                $(".project-list").removeClass("project-list-single");
             }
         }
     }
