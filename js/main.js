@@ -82,7 +82,7 @@ var Page = {
                 var interval = window.setInterval(function(){
                     if ($(".project-list").length > 0) {
                         window.clearInterval(interval);
-                        $(".project-list .project-item a[href=projects/" + args[0] + "]").click();
+                        $(".project-list .project-item[href=projects/" + args[0] + "]").click();
                     }
                 }, 500);
             }
