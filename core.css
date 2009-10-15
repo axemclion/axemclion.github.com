@@ -36,7 +36,7 @@ body, table {
 #navigation-bar li {
     display: inline;
     border-left: SOLID 1px #ffffff;
-    border-right: SOLID 1px #CCCCCC;
+    border-right: SOLID 1px #333333;
     margin: 0;
     padding: 0;
 }
@@ -68,12 +68,30 @@ body, table {
     max-width: 300px;
     text-decoration: none;
     color: #000000;
-	display: inline-table;
+    display: inline-table;
     background-color: #FFFFFF;
 }
 
 .project-item a:hover {
     background-color: #EEEEEE;
+}
+
+.tags {
+    font-size: 0.7em;
+    padding: 0.2em 0.5em 0.5em 0.5em;
+	overflow-x : hidden;
+	height : 1em;
+	text-align : right;
+}
+
+.tag-category {
+    text-align: right;
+    display: inline;
+    color: #006600;
+}
+
+.duration {
+    display: none;
 }
 
 .project-list-single {
@@ -91,7 +109,7 @@ body, table {
     border-left: SOLID 1px #CCCCCC;
 }
 
-.project-list-single span {
+.project-list-single div {
     display: none;
 }
 
