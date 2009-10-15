@@ -70,7 +70,7 @@ body, table {
     height: 100%;
 }
 
-.project-list-single div {
+.project-list-single .project-item {
     display: block;
     border: none;
     width: 100%;
@@ -79,7 +79,11 @@ body, table {
     border-left: SOLID 1px #CCCCCC;
 }
 
-.project-list-single span {
+.project-list-single .project-tweet {
+    display: none;
+}
+
+.project-list-single .project-name {
     font-size: 1em;
     font-weight: normal;
     color: #000000;

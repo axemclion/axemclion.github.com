@@ -6,10 +6,10 @@ $(document).ready(function(){
                 document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
             },
             getLocation: function(){
-                return document.location.href.split(/[?#]/g)[1];
+                return document.location.href.split(/[?#]/)[1].split(/[\/.]/)[0];
             },
             getArgs: function(){
-                return document.location.href.split(/[?#]/g).slice(2).join("");
+                return document.location.href.split(/[?#]/)[1].split(/[\/]/).slice(1);
             }
         }
     });
@@ -22,6 +22,7 @@ $(document).ready(function(){
 var Page = {
     init: function(){
         this.initializeLinks();
+        this.loadModule();
     },
     
     initializeLinks: function(target){
@@ -32,11 +33,12 @@ var Page = {
         
         $(target).find(".inline-load").click(function(){
             var cur = $(this);
+            $("#" + cur.attr("target")).html("Loading");
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
                 if (status === "success") {
-                    $.urlHelper.setLocation(cur.attr("name"));
+                    $.urlHelper.setLocation(cur.attr("href"));
                     me.initializeLinks("#" + cur.attr("target"));
-                    me.onModuleLoad();
+                    me.onloadModule();
                 }
                 else {
                     $("#" + cur.attr("target")).load("notfound.html");
@@ -46,23 +48,44 @@ var Page = {
         });
     },
     
-    onModuleLoad: function(){
-        var me = this;
+    onloadModule: function(){
         var moduleName = $.urlHelper.getLocation();
-        if (this.modules[moduleName] && typeof(this.modules[moduleName]) === "function") {
-            this.modules[moduleName].call(me, $.urlHelper.getArgs());
+        if (this.onLoadHandler[moduleName] && typeof(this.onLoadHandler[moduleName]) === "function") {
+            this.onLoadHandler[moduleName].call(this);
         }
     },
     
-    modules: {
-        "projects": function(args){
-            if (args != "") {
-                $(".project-tweet").hide();
-                $(".project-list").addClass("project-list-single");
-            }
-            else {
+    onLoadHandler: {
+        "projects": function(){
+            var args = $.urlHelper.getArgs();
+            if (args && args.length == 0) {
                 $(".project-list").removeClass("project-list-single");
             }
+            else {
+                $(".project-list").addClass("project-list-single");
+            }
         }
+    },
+    
+    loadModule: function(){
+        var moduleName = $.urlHelper.getLocation();
+        var args = $.urlHelper.getArgs();
+        $("#navigation-bar a[href=" + moduleName + ".html]").click();
+        if (this.loadModuleHandler[moduleName] && typeof(this.loadModuleHandler[moduleName]) === "function") {
+            this.loadModuleHandler[moduleName].call(this, args);
+        }
+    },
+    
+    loadModuleHandler: {
+        "projects": function(args){
+            if (args && args.length > 0) {
+                var interval = window.setInterval(function(){
+                    if ($(".project-list").length > 0) {
+                        window.clearInterval(interval);
+                        $(".project-list .project-item a[href=projects/" + args[0] + "]").click();
+                    }
+                }, 500);
+            }
+        },
     }
 };
