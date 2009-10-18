@@ -66,9 +66,6 @@ body, table {
     color: #000000;
 }
 
-.project-list {
-}
-
 .project-item {
     border: #CCCCCC SOLID 2px;
     margin: 0.5em;
@@ -115,6 +112,15 @@ body, table {
     font-weight: normal;
 }
 
+.project {
+    background-position: 99% 5%;
+    background-repeat: no-repeat;
+}
+
+.project-image {
+    display: none;
+}
+
 .project-links {
     padding: 0;
     width: 90%;
@@ -126,7 +132,7 @@ body, table {
     padding: 0.3em;
 }
 
-.project-news, .project-source, .project-link {
+.project-links a {
     text-decoration: none;
 }
 
@@ -159,7 +165,7 @@ body, table {
     margin: 1em 0 0 0;
 }
 
-.project-name, .project-title {
+.project-name {
     font-size: 1.2em;
     color: #333333;
     display: block;
@@ -170,6 +176,9 @@ body, table {
 .project-title {
     width: 100%;
     padding: 0 0 1em 0;
+    font-size: 2em;
+    font-weight: bold;
+    color: #408DFB;
 }
 
 .project-description {

@@ -65,6 +65,8 @@ var Page = {
             }
             else {
                 $(".project-list").addClass("project-list-single");
+                $(".project").css("background-image", "url('" + $(".project-image").attr("src") + "')");
+                $(".project-links a").attr("target", "_blank");
             }
         }
     },
