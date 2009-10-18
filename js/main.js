@@ -6,10 +6,12 @@ $(document).ready(function(){
                 document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
             },
             getLocation: function(){
-                return document.location.href.split(/[?#]/)[1].split(/[\/.]/)[0];
+            	var locationPart = document.location.href.split(/[?#]/);
+                return locationPart[1] ? locationPart[1].split(/[\/.]/)[0] : null;
             },
             getArgs: function(){
-                return document.location.href.split(/[?#]/)[1].split(/[\/]/).slice(1);
+            	var locationPart = document.location.href.split(/[?#]/);
+                return  locationPart[1] ? locationPart[1].split(/[\/]/).slice(1) : null;
             }
         }
     });

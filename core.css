@@ -10,50 +10,57 @@ body, table {
 }
 
 #header {
-    height: 15%;
-    min-height: 85px;
+    background-image: url('images/back-head.jpg');
+    background-repeat: repeat-x;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+#me-image {
+    padding: 2px;
+    border: SOLID 1px #FFFFFF;
+    margin: 0.2em;
+    height: 32px;
+    width: 32px;
 }
 
 #page-title {
-    background-color: #000000;
-    color: #FFFFFF;
     font-family: Garamond, Georgia, Times;
     font-size: 2em;
-    padding: 0.3em;
-    text-shadow: 0 0 10px;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    height: 32px;
 }
 
 #navigation-bar {
     list-style-type: none;
     text-align: right;
-    padding: 0;
-    margin: 0;
+    padding: 0 1em 0 0;
     font-size: 1.2em;
-    background-color: #CCCCCC;
-    border-bottom: SOLID 1px #333333;
+    margin: 0;
 }
 
 #navigation-bar li {
     display: inline;
-    border-left: SOLID 1px #ffffff;
-    border-right: SOLID 1px #333333;
     margin: 0;
-    padding: 0;
 }
 
 #navigation-bar a {
     padding: 0.3em 0.5em 0.3em 0.5em;
     text-decoration: none;
-    color: #000000;
     display: inline-block;
+    color: #FFFFFF;
+    background-color: #111111;
+    -moz-border-radius: 10px 10px 0 0;
 }
 
 #navigation-bar a:hover {
-    text-decoration: underline;
+    background-color: #FFFFFF;
+    color: #000000;
 }
 
 #content {
-    height: 79%;
     overflow: auto;
     background-color: #FFFFFF;
     color: #000000;
@@ -79,9 +86,9 @@ body, table {
 .tags {
     font-size: 0.7em;
     padding: 0.2em 0.5em 0.5em 0.5em;
-	overflow-x : hidden;
-	height : 1em;
-	text-align : right;
+    overflow-x: hidden;
+    height: 1em;
+    text-align: right;
 }
 
 .tag-category {
@@ -125,6 +132,10 @@ body, table {
     float: left;
 }
 
+.project {
+    padding: 1em;
+}
+
 .project-name, .project-title {
     font-size: 1.2em;
     color: #333333;
@@ -147,12 +158,9 @@ body, table {
 }
 
 #footer {
-    background-color: #000000;
-    color: #EEEEEE;
     text-align: center;
     padding: 0.3em;
     font-size: 0.8em;
-    height: 5%;
 }
 
 #footer a {
