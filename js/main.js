@@ -6,12 +6,12 @@ $(document).ready(function(){
                 document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
             },
             getLocation: function(){
-            	var locationPart = document.location.href.split(/[?#]/);
+                var locationPart = document.location.href.split(/[?#]/);
                 return locationPart[1] ? locationPart[1].split(/[\/.]/)[0] : null;
             },
             getArgs: function(){
-            	var locationPart = document.location.href.split(/[?#]/);
-                return  locationPart[1] ? locationPart[1].split(/[\/]/).slice(1) : null;
+                var locationPart = document.location.href.split(/[?#]/);
+                return locationPart[1] ? locationPart[1].split(/[\/]/).slice(1) : null;
             }
         }
     });
@@ -33,32 +33,40 @@ var Page = {
             target = document.body;
         }
         
-        $(target).find(".inline-load").click(function(){
+        $("#navigation-bar a").click(function(event){
+            $("#navigation-bar a").removeClass("navigation-bar-active");
+            $(this).addClass("navigation-bar-active");
+        });
+        
+        $(target).find(".inline-load").bind("click", function(){
             var cur = $(this);
             $("#" + cur.attr("target")).html("Loading");
+            $.urlHelper.setLocation(cur.attr("href"));
+            
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
                 if (status === "success") {
-                    $.urlHelper.setLocation(cur.attr("href"));
                     me.initializeLinks("#" + cur.attr("target"));
                     me.onloadModule();
                 }
                 else {
-                    $("#" + cur.attr("target")).load("notfound.html");
+                    $("#" + cur.attr("target")).load("notfound.html", null, function(){
+                        me.onloadModule(false);
+                    });
                 }
             });
             return false;
         });
     },
     
-    onloadModule: function(){
+    onloadModule: function(flag){
         var moduleName = $.urlHelper.getLocation();
         if (this.onLoadHandler[moduleName] && typeof(this.onLoadHandler[moduleName]) === "function") {
-            this.onLoadHandler[moduleName].call(this);
+            this.onLoadHandler[moduleName].call(this, flag);
         }
     },
     
     onLoadHandler: {
-        "projects": function(){
+        "projects": function(flag){
             var args = $.urlHelper.getArgs();
             if (args && args.length == 0) {
                 $(".project-list").removeClass("project-list-single");
