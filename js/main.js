@@ -86,6 +86,9 @@ var Page = {
         if (this.loadModuleHandler[moduleName] && typeof(this.loadModuleHandler[moduleName]) === "function") {
             this.loadModuleHandler[moduleName].call(this, args);
         }
+        else {
+            $("#aboutMe").click();
+        }
     },
     
     loadModuleHandler: {
