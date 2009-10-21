@@ -41,7 +41,11 @@ var Page = {
         $(target).find(".inline-load").bind("click", function(){
             var cur = $(this);
             $("#" + cur.attr("target")).html("Loading");
-            var baseLocation = document.location.href.split(/[?#]/)[0].split(/\//).slice(0, -1).join("\/") + "/"
+            var baseLocation = document.location.href.split(/[?#]/)[0];
+	    var lastLocation = baseLocation.lastIndexOf("/");
+	    if (lastLocation != -1){
+                baesLocation = baseLocation.substring(0,lastLocation);  
+            }
             $.urlHelper.setLocation(cur.attr("href").replace(baseLocation, ""));
             
             $("#" + cur.attr("target")).load(cur.attr("href"), null, function(responseText, status){
