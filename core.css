@@ -107,8 +107,9 @@ body, table {
 
 .project-list-single {
     width: 28%;
-    float: left;
+    float: right;
     height: 100%;
+	margin-top : 2em;
 }
 
 .project-list-single .project-item {
