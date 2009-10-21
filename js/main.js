@@ -3,7 +3,7 @@ $(document).ready(function(){
     $.extend({
         "urlHelper": {
             setLocation: function(location){
-                document.location = [document.location.href.split(/[?#]/)[0], location].join("#");
+                document.location.href = [document.location.href.split(/[?#]/)[0], location].join("#");
             },
             getLocation: function(){
                 var locationPart = document.location.href.split(/[?#]/);
@@ -101,6 +101,6 @@ var Page = {
                     }
                 }, 500);
             }
-        },
+        }	
     }
 };
