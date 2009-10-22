@@ -1,269 +1,307 @@
-body, table {
-    font-size: 14px;
-    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
+body,table {
+	font-size: 14px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 .clear {
-    clear: both;
+	clear: both;
 }
 
 #header {
-    background-image: url('images/back-head.jpg');
-    background-repeat: repeat-x;
-    background-color: #000000;
-    color: #FFFFFF;
+	background-image: url('images/back-head.jpg');
+	background-repeat: repeat-x;
+	background-color: #000000;
+	color: #FFFFFF;
 }
 
 #me-image {
-    padding: 2px;
-    border: SOLID 1px #FFFFFF;
-    margin: 0.2em;
-    height: 32px;
-    width: 32px;
+	padding: 2px;
+	border: SOLID 1px #FFFFFF;
+	margin: 0.2em;
+	height: 32px;
+	width: 32px;
 }
 
 #page-title {
-    font-family: Garamond, Georgia, Times;
-    font-size: 2em;
-    display: inline;
-    padding: 0;
-    margin: 0;
-    height: 32px;
+	font-family: Garamond, Georgia, Times;
+	font-size: 2em;
+	display: inline;
+	padding: 0;
+	margin: 0;
+	height: 32px;
 }
 
 #navigation-bar {
-    list-style-type: none;
-    text-align: right;
-    padding: 0 1em 0 0;
-    font-size: 1.2em;
-    margin: 0;
+	list-style-type: none;
+	text-align: right;
+	padding: 0 1em 0 0;
+	font-size: 1.2em;
+	margin: 0;
 }
 
 #navigation-bar li {
-    display: inline;
-    margin: 0;
+	display: inline;
+	margin: 0;
 }
 
 .navigation-bar-link {
-    padding: 0.3em 0.5em 0.3em 0.5em;
-    text-decoration: none;
-    display: inline-block;
-    color: #FFFFFF;
-    background-color: #111111;
-    -moz-border-radius: 7px 7px 0 0;
-    -webkit-border-radius: 7px 7px 0 0;
-    border-radius: 7px 7px 0 0;
+	padding: 0.3em 0.5em 0.3em 0.5em;
+	text-decoration: none;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #111111;
+	-moz-border-radius: 7px 7px 0 0;
+	-webkit-border-radius: 7px 7px 0 0;
+	border-radius: 7px 7px 0 0;
 }
 
 .navigation-bar-active {
-    background-color: #FFFFFF;
-    color: #000000;
+	background-color: #FFFFFF;
+	color: #000000;
 }
 
 #navigation-bar a:hover {
-    background-color: #CCCCCC;
-    color: #000000;
+	background-color: #CCCCCC;
+	color: #000000;
 }
 
 #content {
-    overflow: auto;
-    background-color: #FFFFFF;
-    color: #000000;
+	overflow: auto;
+	background-color: #FFFFFF;
+	color: #000000;
 }
 
 .project-item {
-    border: #CCCCCC SOLID 2px;
-    margin: 0.5em;
-    width: 30%;
-    text-decoration: none;
-    color: #000000;
-    display: inline-table;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+	border: #CCCCCC SOLID 2px;
+	margin: 0.5em;
+	width: 30%;
+	text-decoration: none;
+	color: #000000;
+	display: inline-table;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .project-item a:hover {
-    background-color: #EEEEEE;
+	background-color: #EEEEEE;
 }
 
 .tags {
-    font-size: 0.7em;
-    padding: 0.2em 0.5em 0.5em 0.5em;
-    text-align: right;
+	font-size: 0.7em;
+	padding: 0.2em 0.5em 0.5em 0.5em;
+	text-align: right;
 }
 
 .tag-category {
-    text-align: right;
-    display: inline;
-    color: #006600;
+	text-align: right;
+	display: inline;
+	color: #006600;
 }
 
 .duration {
-    display: none;
+	display: none;
 }
 
 .project-list-single {
-    width: 28%;
-    float: right;
-    height: 100%;
-	margin-top : 2em;
+	width: 28%;
+	float: right;
+	height: 100%;
+	margin-top: 2em;
 }
 
 .project-list-single .project-item {
-    display: block;
-    border: none;
-    width: 100%;
-    margin: 0;
-    font-weight: normal;
+	display: block;
+	border: none;
+	width: 100%;
+	margin: 0;
+	font-weight: normal;
 }
 
 .project {
-    background-position: 99% 5%;
-    background-repeat: no-repeat;
+	background-position: 99% 5%;
+	background-repeat: no-repeat;
 }
 
 .project-image {
-    display: none;
+	display: none;
 }
 
 .project-links {
-    padding: 0;
-    width: 80%;
-    margin: 1%;
+	padding: 0;
+	width: 80%;
+	margin: 1%;
 }
 
 .project-links td:first-child {
-    text-align: right;
+	text-align: right;
 }
 
 .project-video {
-    background-image: url("images/ajax-loader.gif");
-    background-position: center;
-    background-repeat: no-repeat;
+	background-image: url("images/ajax-loader.gif");
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .project-links td {
-    border: SOLID 2px #CCCCCC;
-    padding: 0.3em;
+	border: SOLID 2px #CCCCCC;
+	padding: 0.3em;
 }
 
 .project-links a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .project-list-single div {
-    display: none;
+	display: none;
 }
 
 .project-video {
-    text-align: center;
+	text-align: center;
 }
 
 .project-list-single .project-name {
-    display: block;
-    font-size: 1em;
-    font-weight: normal;
-    color: #000000;
+	display: block;
+	font-size: 1em;
+	font-weight: normal;
+	color: #000000;
 }
 
 #projectContent {
-    width: 70%;
-    float: left;
+	width: 70%;
+	float: left;
 }
 
 .project {
-    padding: 1em;
-    border-right: SOLID 2px #CCCCCC;
+	padding: 1em;
+	border-right: SOLID 2px #CCCCCC;
 }
 
 .project div {
-    margin: 1em 0 0 0;
+	margin: 1em 0 0 0;
 }
 
 .project-name {
-    font-size: 1.2em;
-    color: #333333;
-    display: block;
-    padding: 0.2em 1em 0.2em 0.5em;
-    color: #408DFB;
+	font-size: 1.2em;
+	color: #333333;
+	display: block;
+	padding: 0.2em 1em 0.2em 0.5em;
+	color: #408DFB;
 }
 
 .project-title {
-    width: 100%;
-    padding: 0 0 0.5em 0;
-    font-size: 2.5em;
-    font-family: Garamond, Georgia, Times;
-    font-weight: normal;
+	width: 100%;
+	padding: 0 0 0.5em 0;
+	font-size: 2.5em;
+	font-family: Garamond, Georgia, Times;
+	font-weight: normal;
 }
 
 .project-summary {
+	
 }
 
 .project-description {
-    text-align: justify;
-    margin-left: 3em;
-    padding-left: 1em;
-    border-left: SOLID 5px #CCCCCC;
+	text-align: justify;
+	margin-left: 3em;
+	padding-left: 1em;
+	border-left: SOLID 5px #CCCCCC;
 }
 
 .project-tweet {
-    clear: both;
-    display: block;
-    text-align: justify;
-    padding: 0.5em;
-    font-size: 0.9em;
+	clear: both;
+	display: block;
+	text-align: justify;
+	padding: 0.5em;
+	font-size: 0.9em;
 }
 
 #footer {
-    text-align: center;
-    padding: 0.3em;
-    font-size: 0.8em;
-    background-color: #000000;
-    color: #EEEEEE;
+	text-align: center;
+	padding: 0.3em;
+	font-size: 0.8em;
+	background-color: #000000;
+	color: #EEEEEE;
 }
 
 #footer a {
-    text-decoration: none;
-    color: #408DFB;
+	text-decoration: none;
+	color: #408DFB;
 }
 
 #notFound div {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 3em;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 3em;
 }
 
 #my-links {
-    list-style: none;
+	list-style: none;
 }
 
 #my-links li {
-    display: inline;
-    border: SOLID 2px #CCCCCC;
-    padding: 0.3em;
-    margin: 0.3em;
+	display: inline;
+	border: SOLID 2px #CCCCCC;
+	padding: 0.3em;
+	margin: 0.3em;
 }
 
 #my-links a {
-    text-decoration: none;
-    color: #408DFB;
-    height: 16px;
+	text-decoration: none;
+	color: #408DFB;
+	height: 16px;
 }
 
 #my-links img {
-    vertical-align: text-bottom;
-    margin-right: 0.3em;
-    height: 16px;
+	vertical-align: text-bottom;
+	margin-right: 0.3em;
+	height: 16px;
 }
 
 .external-link {
-    color: #EEEEEE;;
-    text-decoration: none;
-    font-size: 0.7em;
-    padding-right: 0.3em;
-    border-right: SOLID 1px #CCCCCC;
+	color: #EEEEEE;;
+	text-decoration: none;
+	font-size: 0.7em;
+	padding-right: 0.3em;
+	border-right: SOLID 1px #CCCCCC;
+}
+
+.left-pane {
+	float: left;
+}
+
+.right-pane {
+	float: right;
+}
+
+.big-title {
+	font-size: 3em;
+	font-family: Garamond, Georgia, Times
+}
+
+div.feedburnerFeedBlock ul {
+	list-style-type: none;
+	font-size: 0.8em;
+}
+
+div.feedburnerFeedBlock ul li span.headline {
+	font-weight: bold;
+	display: block;
+	font-size: 1.2em;
+	margin: 1em 0 0 -0.5em;
+}
+
+div.feedburnerFeedBlock ul li span.headline a {
+	color: #408DFB;
+}
+
+#creditfooter {
+	display: none;
+}
+
+p.date {
+	color: #006600;
 }

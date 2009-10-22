@@ -42,9 +42,9 @@ var Page = {
             var cur = $(this);
             $("#" + cur.attr("target")).html("Loading");
             var baseLocation = document.location.href.split(/[?#]/)[0];
-	    var lastLocation = baseLocation.lastIndexOf("/");
-	    if (lastLocation != -1){
-                baesLocation = baseLocation.substring(0,lastLocation);  
+            var lastLocation = baseLocation.lastIndexOf("/");
+            if (lastLocation != -1) {
+                baesLocation = baseLocation.substring(0, lastLocation);
             }
             $.urlHelper.setLocation(cur.attr("href").replace(baseLocation, ""));
             
@@ -68,6 +68,9 @@ var Page = {
         if (this.onLoadHandler[moduleName] && typeof(this.onLoadHandler[moduleName]) === "function") {
             this.onLoadHandler[moduleName].call(this, flag);
         }
+        else {
+            this.onLoadHandler["homePage"].call(this, flag);
+        }
     },
     
     onLoadHandler: {
@@ -81,6 +84,26 @@ var Page = {
                 $(".project").css("background-image", "url('" + $(".project-image").attr("src") + "')");
                 $(".project-links a").attr("target", "_blank");
             }
+        },
+        "homePage": function(flag){
+            $("#README").load("README");
+            $("#seeAllProjects").click(function(){
+                $("#projects").click();
+            });
+            $("#otherProjects").load("projects.html", function(){
+                $(".project-item").css("width", "90%");
+                var projectsToShow = 4;
+                $(".project-item").hide();
+                $(".project-item").each(function(){
+                    if (projectsToShow === 0) {
+                        return;
+                    }
+                    if (Math.floor(Math.random() * 10 % 2)) {
+                        projectsToShow--;
+                        $(this).show();
+                    }
+                });
+            });
         }
     },
     
@@ -92,7 +115,7 @@ var Page = {
             this.loadModuleHandler[moduleName].call(this, args);
         }
         else {
-            $("#aboutMe").click();
+            this.loadModuleHandler["homePage"].call(this, args);
         }
     },
     
@@ -106,6 +129,9 @@ var Page = {
                     }
                 }, 500);
             }
+        },
+        "homePage": function(args){
+            $("#home").click();
         }
     }
 };
