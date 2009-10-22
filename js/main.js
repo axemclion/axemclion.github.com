@@ -135,7 +135,9 @@ var Page = {
                 }, 500);
             }
         },
-        homePage: function(){
+        "homePage": function(){
+        },
+        "misc": function(){
         
         }
     }
