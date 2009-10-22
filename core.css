@@ -140,9 +140,7 @@ body,table {
 }
 
 .project-video {
-	background-image: url("images/ajax-loader.gif");
-	background-position: center;
-	background-repeat: no-repeat;
+	
 }
 
 .project-links td {
