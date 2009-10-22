@@ -282,6 +282,22 @@ body,table {
 	font-family: Garamond, Georgia, Times
 }
 
+.gm-table {
+	padding: 0;
+	width: 100%;
+	font-size: 0.8em;
+	margin: 1%;
+}
+
+.gm-table td:first-child {
+	text-align: right;
+}
+
+.gm-table td {
+	border-bottom: dotted 1px #CCCCCC;
+	padding: 0.3em;
+}
+
 div.feedburnerFeedBlock ul {
 	list-style-type: none;
 	font-size: 0.8em;
