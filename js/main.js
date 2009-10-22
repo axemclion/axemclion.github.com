@@ -87,9 +87,6 @@ var Page = {
         },
         "homePage": function(flag){
             $("#README").load("README");
-            $("#seeAllProjects").click(function(){
-                $("#projects").click();
-            });
             $("#otherProjects").load("projects.html", function(){
                 $(".project-item").css("width", "90%");
                 var projectsToShow = 4;
@@ -104,19 +101,20 @@ var Page = {
                     }
                 });
             });
+            $("#seeAllProjects").click(function(){
+                $("#projects").click();
+            });
         }
     },
     
     loadModule: function(){
         var moduleName = $.urlHelper.getLocation();
         var args = $.urlHelper.getArgs();
+        if (!this.loadModuleHandler[moduleName] || !typeof(this.loadModuleHandler[moduleName]) === "function") {
+            moduleName = "homePage";
+        }
         $("#navigation-bar a[href=" + moduleName + ".html]").click();
-        if (this.loadModuleHandler[moduleName] && typeof(this.loadModuleHandler[moduleName]) === "function") {
-            this.loadModuleHandler[moduleName].call(this, args);
-        }
-        else {
-            this.loadModuleHandler["homePage"].call(this, args);
-        }
+        this.loadModuleHandler[moduleName].call(this, args);
     },
     
     loadModuleHandler: {
@@ -130,8 +128,8 @@ var Page = {
                 }, 500);
             }
         },
-        "homePage": function(args){
-            $("#home").click();
+        homePage: function(){
+        
         }
     }
 };
