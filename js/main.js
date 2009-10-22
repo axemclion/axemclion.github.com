@@ -86,6 +86,7 @@ var Page = {
             }
         },
         "homePage": function(flag){
+            var me = this;
             $("#README").load("README");
             $("#otherProjects").load("projects.html", function(){
                 $(".project-item").css("width", "90%");
@@ -100,7 +101,13 @@ var Page = {
                         $(this).show();
                     }
                 });
+                $(".project-item").click(function(){
+                    $.urlHelper.setLocation($(this).attr("href"));
+                    me.loadModule();
+                    return false;
+                });
             });
+            
             $("#seeAllProjects").click(function(){
                 $("#projects").click();
             });
