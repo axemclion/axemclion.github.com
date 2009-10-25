@@ -138,7 +138,10 @@ var Page = {
         "homePage": function(){
         },
         "misc": function(){
-        
+        },
+        "about-me": function(){
+        },
+        "contact": function(){
         }
     }
 };
