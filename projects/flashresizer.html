@@ -56,17 +56,8 @@
         </div>
         FlashPlus is also available for Firefox and Internet Explorer as bookmarklet.
         <br>
-        You can click this button to &nbsp;<input type = "button" id = "bookmarklet-adder" value = "Install Flash Resizer">&nbsp;for Firefox or Internet Explorer
-        <script type="text/javascript">
-            document.getElementById("bookmarklet-adder").onclick = function(){
-                var link = "javascript:document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).setAttribute('src','http://flashchrome.googlecode.com/hg/FlashResize.js');"
-                if (document.all) 
-                    window.external.AddFavorite(link, 'FlashResizer');
-                else 
-                    if (window.sidebar) 
-                        window.sidebar.addPanel(link, "FlashResizer", '');
-            }
-        </script>
+        <a class = "project-link" href = "javascript:document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).setAttribute('src','http://flashchrome.googlecode.com/hg/FlashResize.js');">Flash Resizer</a>
+        (drag and drop this link in bookmarks/favourites toolbar) 
         <div>
         </div>
         <div class = "project-video">
