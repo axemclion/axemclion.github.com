@@ -36,21 +36,39 @@
         Media content like flash videos and games on many sites can be seen better if they could be resized to larger dimensions or darken everything except the media on the page. 
         This project adds a host of features web pages that make interacting with media sites like youtube or miniclip, better.
         <br/>
-        The Google Chrome extension makes media content more usable by allowing you to 
-        <ul>
-            <li>
-                Move and resize media content on web pages. 
-            </li>
-            <li>
-                Darken everything on the page except the flash content
-            </li>
-            <li>
-                Block that annoyingly loud advertisement on the page 
-            </li>
-            <li>
-                Popout the flash content out of the page
-            </li>
-        </ul>
+        <br/>
+        <div>
+            The Google Chrome extension makes media content more usable by allowing you to 
+            <ul>
+                <li>
+                    Move and resize media content on web pages. 
+                </li>
+                <li>
+                    Darken everything on the page except the flash content
+                </li>
+                <li>
+                    Block that annoyingly loud advertisement on the page 
+                </li>
+                <li>
+                    Popout the flash content out of the page
+                </li>
+            </ul>
+        </div>
+        FlashPlus is also available for Firefox and Internet Explorer as bookmarklet.
+        <br>
+        You can click this button to &nbsp;<input type = "button" id = "bookmarklet-adder" value = "Install Flash Resizer">&nbsp;for Firefox or Internet Explorer
+        <script type="text/javascript">
+            document.getElementById("bookmarklet-adder").onclick = function(){
+                var link = "javascript:document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).setAttribute('src','http://flashchrome.googlecode.com/hg/FlashResize.js');"
+                if (document.all) 
+                    window.external.AddFavorite(link, 'FlashResizer');
+                else 
+                    if (window.sidebar) 
+                        window.sidebar.addPanel(link, "FlashResizer", '');
+            }
+        </script>
+        <div>
+        </div>
         <div class = "project-video">
             <object width="640" height="505">
                 <param name="movie" value="http://www.youtube.com/v/xt8doYQeEhQ&hl=en&fs=1&rel=0&hd=1">
@@ -63,7 +81,7 @@
         </div>
         <br/>
         With the bookmarklet, you can select any flash content, move it and re-size it by dragging the corners. 
-        Click <a href = "javascript:document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).setAttribute('src','http://flashchrome.googlecode.com/hg/FlashResize.js');"> here </a>
-        to enable the bookmarklet for this page and then try to resize or move the youtube video below. 
+        Click <a href = "javascript:document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).setAttribute('src','http://flashchrome.googlecode.com/hg/FlashResize.js');"> FlashResizer </a>
+        to enable the bookmarklet for this page and then try to resize or move the youtube video below.
     </div>
 </div>
