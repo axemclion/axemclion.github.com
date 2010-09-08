@@ -1,0 +1,53 @@
+<html>
+    <head>
+        Web Site Generator
+    </head>
+    <body>
+    </body>
+    <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.2.min.js">
+    </script>
+    <script type = "text/javascript" src="libs/jszip/jszip.js">
+    </script>
+    <script type = "text/javascript">
+        var Generator = (function(){
+            var zip = new JSZip();
+            var addFile = function(filePath){
+            
+            }
+            return {
+                page: function(filePath, templateList, content){
+                    var toLoad = templateList.length;
+                    var result = {};
+                    $.ajax({
+                        "datatype": "text",
+                        "complete": function(){
+                            toLoad--;
+                            if (!toLoad) {
+                                var content = [];
+                                for (var i = 0; i < templateList.length; i++) {
+                                    content.push(result[templateList[i]]);
+                                }
+                            }
+                        },
+                        "success": function(data, status, xhr){
+                        	
+                        }
+                    });
+                },
+                getZip: function(){
+                    location.href = "data:application/zip;base64," + zip.generate();
+                }
+            }
+        })();
+        
+        var Projects = (function(){
+            var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?"
+            $.getJSON(projectsUrl, function(data){
+                $.each(data.feed.entry, function(){
+                    Generator.page(this.gsx$name, ["header", "projects", "footer"], this);
+                });
+            });
+            
+        })();
+    </script>
+</html>
