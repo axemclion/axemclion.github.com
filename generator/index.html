@@ -6,48 +6,82 @@
     </body>
     <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.2.min.js">
     </script>
-    <script type = "text/javascript" src="libs/jszip/jszip.js">
+    <script type = "text/javascript" src="libs/jszip.js">
     </script>
     <script type = "text/javascript">
         var Generator = (function(){
-            var zip = new JSZip();
-            var addFile = function(filePath){
-            
+            var templates = {};
+            /**
+             * Gets an individual tempalte
+             * @param {Object} templateName
+             * @param {Object} callback
+             */
+            var getTemplate = function(templateName, callback){
+                if (typeof templates[templateName] !== "undefined") {
+                    callback.call(this);
+                    return;
+                }
+                var ajaxSuccess = function(key){
+                    return function(data, status, xhr){
+                        templates[key] = data;
+                    }
+                };
+                $.ajax({
+                    "url": ["templates/", templateName, ".html"].join(""),
+                    "success": ajaxSuccess(templateName),
+                    "complete": callback
+                });
             }
-            return {
-                page: function(filePath, templateList, content){
-                    var toLoad = templateList.length;
-                    var result = {};
-                    $.ajax({
-                        "datatype": "text",
-                        "complete": function(){
-                            toLoad--;
-                            if (!toLoad) {
-                                var content = [];
-                                for (var i = 0; i < templateList.length; i++) {
-                                    content.push(result[templateList[i]]);
-                                }
-                            }
-                        },
-                        "success": function(data, status, xhr){
-                        	
+            /**
+             * Gets a list of tempaltes in order
+             * @param {Object} templateUrlList
+             * @param {Object} onGetTemplates
+             */
+            var getTemplates = function(templateUrlList, onGetTemplates){
+                var loaded = 0;
+                
+                var gotTemplate = function(){
+                    loaded++;
+                    var result = [];
+                    if (loaded >= templateUrlList.length) {
+                        for (var i = 0; i < templateUrlList.length; i++) {
+                            result.push(templates[templateUrlList[i]]);
                         }
+                        onGetTemplates.call(this, result.join(""));
+                    }
+                    else {
+                        getTemplate(templateUrlList[loaded], gotTemplate);
+                    }
+                };
+                getTemplate(templateUrlList[loaded], gotTemplate);
+            }
+            
+            return {
+                getPageFromTemplate: function(templateUrlList, values, callback){
+                    getTemplates(templateUrlList, function(template){
+                        for (var x in values) {
+                            template = template.replace(new RegExp("__" + x.replace(/\$/, "\\\$") + "__", "g"), values[x].$t);
+                        }
+                        callback.call(this, template);
                     });
                 },
-                getZip: function(){
-                    location.href = "data:application/zip;base64," + zip.generate();
-                }
+                "getTemplates": getTemplates
             }
         })();
         
-        var Projects = (function(){
-            var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?"
+        var zip = new JSZip();
+        var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?";
+        Generator.getTemplates(["header", "projects", "projectList", "footer"], function(){
             $.getJSON(projectsUrl, function(data){
-                $.each(data.feed.entry, function(){
-                    Generator.page(this.gsx$name, ["header", "projects", "footer"], this);
-                });
+                var projectList = [];
+				for (var i = 0; u < data.feed.entry.length; i++) {
+                    Generator.getPageFromTemplate(["header", "projects", "footer"], data.feed.entry[i], function(page){
+                        zip.add("projects/" + +".html", page);
+                    });
+                 	
+                }
+				Generator.getPageFromTemplate(["header", "projectsList", "footer"], data)
             });
-            
-        })();
+        });
     </script>
 </html>
