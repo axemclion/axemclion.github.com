@@ -1,9 +1,9 @@
 <div class = "project">
     <div class = "project-title">
-        __gsx$title__
+        ${gsx$title.$t}
     </div>
     <div class = "project-summary">
-        __gsx$summary__ 
+        ${gsx$summary.$t}
     </div>
     <div class = "project-image" style ="background-image : url('__gsx$logo__')">
     </div>
@@ -13,7 +13,7 @@
                 Source Code
             </td>
             <td>
-                <a class = "project-source" href = "__gsx$sourcelink__">__gsx$sourcelink__</a>
+                <a class = "project-source" href = "${gsx$sourcelink}">${gsx$sourcelink}</a>
             </td>
         </tr>
         <tr>
@@ -21,20 +21,20 @@
                 Project News
             </td>
             <td>
-                <a class = "project-news" href ="__gsx$blog__">__gsx$blog__</a>
+                <a class = "project-news" href ="${gsx$blog}">${gsx$blog}</a>
             </td>
         </tr>
     </table>
     <div class = "project-description">
-        __gsx$description__
+        ${gsx$description}
     </div>
     <div class = "project-video">
         <object width="660" height="525">
-            <param name="movie" value="__gsx$demo__">
+            <param name="movie" value="${gsx$demo}">
             </param><param name="allowFullScreen" value="true">
             </param><param name="allowscriptaccess" value="always">
             </param>
-            <embed src="__gsx$demo__" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="660" height="525">
+            <embed src="${gsx$demo}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="660" height="525">
             </embed>
         </object>
     </div>

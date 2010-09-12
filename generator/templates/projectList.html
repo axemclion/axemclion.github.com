@@ -1,0 +1,19 @@
+<div class = "project-list">
+    {{each entry}}<a href = "projects/${gsx$name}" class = "inline-load project-item" target = "projectContent">
+        <div class = "project-name">
+            ${gsx$title.$t}
+        </div>
+        <div class = "project-tweet">
+            ${gsx$summary.$t}
+        </div>
+        <div class = "tags">
+            <div class = "tag-category language">
+                ${gsx$languages.$t}
+            </div>
+            <div class = "tag-category misc">
+                {gsx$tags.$t}
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

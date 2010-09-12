@@ -3,19 +3,32 @@
         Web Site Generator
     </head>
     <body>
+        <a href = "javascript:Generator.getFile()">Get Files</a>
     </body>
     <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.2.min.js">
+    </script>
+    <script type = "text/javascript" src="libs/jquery.tmpl.js">
     </script>
     <script type = "text/javascript" src="libs/jszip.js">
     </script>
     <script type = "text/javascript">
         var Generator = (function(){
+            var zip = new JSZip();
+            var tasks = (function(){
+                var taskDiv = $("<div>").appendTo("body");
+                var tasksLeft = 0;
+                return {
+                    "add": function(count){
+                        tasksLeft += (count | 1);
+                        taskDiv.html(tasksLeft);
+                    },
+                    "done": function(count){
+                        tasksLeft -= (count | 1);
+                        taskDiv.html(tasksLeft);
+                    }
+                }
+            })();
             var templates = {};
-            /**
-             * Gets an individual tempalte
-             * @param {Object} templateName
-             * @param {Object} callback
-             */
             var getTemplate = function(templateName, callback){
                 if (typeof templates[templateName] !== "undefined") {
                     callback.call(this);
@@ -33,15 +46,16 @@
                 });
             }
             /**
-             * Gets a list of tempaltes in order
+             * Gets a list of templates in order
              * @param {Object} templateUrlList
              * @param {Object} onGetTemplates
              */
             var getTemplates = function(templateUrlList, onGetTemplates){
                 var loaded = 0;
-                
+                tasks.add(templateUrlList.length);
                 var gotTemplate = function(){
                     loaded++;
+                    tasks.done();
                     var result = [];
                     if (loaded >= templateUrlList.length) {
                         for (var i = 0; i < templateUrlList.length; i++) {
@@ -57,30 +71,35 @@
             }
             
             return {
-                getPageFromTemplate: function(templateUrlList, values, callback){
-                    getTemplates(templateUrlList, function(template){
-                        for (var x in values) {
-                            template = template.replace(new RegExp("__" + x.replace(/\$/, "\\\$") + "__", "g"), values[x].$t);
+                "getTemplates": getTemplates,
+                "addPage": function(templateList, data, page){
+                    tasks.add();
+                    getTemplates(templateList, function(template){
+                        tasks.done();
+                        try {
+                            var content = $("<div>").append($.tmpl(template, data)).html()
+                            zip.add(page, content);
+                        } 
+                        catch (e) {
                         }
-                        callback.call(this, template);
                     });
                 },
-                "getTemplates": getTemplates
+                "getFile": function(){
+                    location.href = "data:application/zip;base64," + zip.generate();
+                }
             }
         })();
         
-        var zip = new JSZip();
-        var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?";
-        Generator.getTemplates(["header", "projects", "projectList", "footer"], function(){
+        Generator.getTemplates(["header", "project", "projectList", "footer"], function(){
+            var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?";
+            
+            // Generate project pages
             $.getJSON(projectsUrl, function(data){
-                var projectList = [];
-				for (var i = 0; u < data.feed.entry.length; i++) {
-                    Generator.getPageFromTemplate(["header", "projects", "footer"], data.feed.entry[i], function(page){
-                        zip.add("projects/" + +".html", page);
-                    });
-                 	
+                var container = $("<div>");
+                for (var i = 0; i < data.feed.entry.length; i++) {
+                    Generator.addPage(["header", "project", "footer"], data.feed.entry[i], "projects/" + data.feed.entry[i].gsx$name.$t + ".html");
                 }
-				Generator.getPageFromTemplate(["header", "projectsList", "footer"], data)
+                Generator.addPage(["header", "projectList", "footer"], data.feed, "projects.html");
             });
         });
     </script>
