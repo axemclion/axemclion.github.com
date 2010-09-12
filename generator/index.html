@@ -19,87 +19,126 @@
                 var tasksLeft = 0;
                 return {
                     "add": function(count){
-                        tasksLeft += (count | 1);
+                        tasksLeft += (count || 1);
                         taskDiv.html(tasksLeft);
                     },
                     "done": function(count){
-                        tasksLeft -= (count | 1);
+                        tasksLeft -= (count || 1);
                         taskDiv.html(tasksLeft);
                     }
                 }
             })();
-            var templates = {};
-            var getTemplate = function(templateName, callback){
-                if (typeof templates[templateName] !== "undefined") {
-                    callback.call(this);
+            
+            var ajaxAll = function(urlList, allCallBack, options){
+                var loaded = 0;
+                var result = {};
+                if (urlList.length === 0) {
+                    allCallBack(result);
                     return;
                 }
-                var ajaxSuccess = function(key){
-                    return function(data, status, xhr){
-                        templates[key] = data;
-                    }
-                };
-                $.ajax({
-                    "url": ["templates/", templateName, ".html"].join(""),
-                    "success": ajaxSuccess(templateName),
-                    "complete": callback
-                });
-            }
-            /**
-             * Gets a list of templates in order
-             * @param {Object} templateUrlList
-             * @param {Object} onGetTemplates
-             */
-            var getTemplates = function(templateUrlList, onGetTemplates){
-                var loaded = 0;
-                tasks.add(templateUrlList.length);
-                var gotTemplate = function(){
-                    loaded++;
-                    tasks.done();
-                    var result = [];
-                    if (loaded >= templateUrlList.length) {
-                        for (var i = 0; i < templateUrlList.length; i++) {
-                            result.push(templates[templateUrlList[i]]);
+                options = options || {};
+                var userCallbacks = {
+                    "success": options.success,
+                    "complete": options.complete
+                }
+                var ajaxOne = function(){
+                    $.extend(options, {
+                        "url": urlList[loaded],
+                        "complete": function(data, status, xhr){
+                            (typeof userCallbacks.complete === "function") && userCallbacks.complete(data, status, xhr);
+                            if (loaded >= urlList.length && typeof allCallBack === "function") {
+                                allCallBack.call(this, result);
+                            }
+                            else {
+                                ajaxOne();
+                            }
+                        },
+                        "success": function(data, status, xhr){
+                            result[urlList[loaded++]] = data;
+                            (typeof userCallbacks.success === "function") && userCallbacks.success(data, status, xhr);
                         }
-                        onGetTemplates.call(this, result.join(""));
-                    }
-                    else {
-                        getTemplate(templateUrlList[loaded], gotTemplate);
-                    }
-                };
-                getTemplate(templateUrlList[loaded], gotTemplate);
-            }
+                    });
+                    $.ajax(options);
+                }
+                ajaxOne();
+            };
             
+            var templates = {};
+            var loadTemplates = function(urls, callback){
+                var list = [];
+                for (var i = 0; i < urls.length; i++) {
+                    if (typeof templates["templates/" + urls[i] + ".html"] === "undefined") {
+                        list.push("templates/" + urls[i] + ".html");
+                        tasks.add();
+                    }
+                }
+                ajaxAll(list, function(data){
+                    for (x in data) {
+                        tasks.done();
+                        templates[x] = data[x];
+                    }
+                    (typeof callback === "function") && callback();
+                });
+            };
+            
+            var getData = function(urlList, callback){
+                var result = {};
+                tasks.add(urlList.length);
+                ajaxAll(urlList, function(result){
+                    for (x in result) {
+                        tasks.done();
+                    }
+                    callback(result);
+                }, {
+                    "dataType": "jsonp"
+                });
+            };
+            
+            var getTemplate = function(urls, callback){
+                loadTemplates(urls, function(){
+                    var result = [];
+                    for (var i = 0; i < urls.length; i++) {
+                        result.push(templates["templates/" + urls[i] + ".html"]);
+                    }
+                    callback.call(this, result.join(""));
+                });
+            };
             return {
-                "getTemplates": getTemplates,
+                "loadTemplates": loadTemplates,
+                "getData": getData,
                 "addPage": function(templateList, data, page){
                     tasks.add();
-                    getTemplates(templateList, function(template){
+                    getTemplate(templateList, function(template){
                         tasks.done();
                         try {
                             var content = $("<div>").append($.tmpl(template, data)).html()
                             zip.add(page, content);
                         } 
                         catch (e) {
+                            console.error(e);
                         }
                     });
                 },
                 "getFile": function(){
                     location.href = "data:application/zip;base64," + zip.generate();
-                }
+                },
             }
         })();
         
-        Generator.getTemplates(["header", "project", "projectList", "footer"], function(){
-            var projectsUrl = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/od6/public/values?alt=json-in-script&callback=?";
-            
-            // Generate project pages
-            $.getJSON(projectsUrl, function(data){
-                var container = $("<div>");
-                for (var i = 0; i < data.feed.entry.length; i++) {
-                    Generator.addPage(["header", "project", "footer"], data.feed.entry[i], "projects/" + data.feed.entry[i].gsx$name.$t + ".html");
+        Generator.loadTemplates(["header", "project", "projectList", "footer"], function(data){
+            var base = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/"
+            var pages = {
+                "projects": base + "od6" + "/public/values?alt=json-in-script&callback=?",
+                "links": base + "od5" + "/public/values?alt=json-in-script&callback=?",
+                "meta": base + "od7" + "/public/values?alt=json-in-script&callback=?",
+                "misc": base + "od4" + "/public/values?alt=json-in-script&callback=?"
+            }
+            Generator.getData([pages.projects, pages.links, pages.meta, pages.misc], function(results){
+                // Project Pages
+                for (var i = 0; i < results[pages.projects].feed.entry.length; i++) {
+                    Generator.addPage(["header", "project", "footer"], results[pages.projects].feed.entry[i], "projects/" + results[pages.projects].feed.entry[i].gsx$name.$t + ".html");
                 }
-                Generator.addPage(["header", "projectList", "footer"], data.feed, "projects.html");
+                Generator.addPage(["header", "projectList", "footer"], results[pages.projects].feed.entry, "projects.html");
             });
         });
     </script>
