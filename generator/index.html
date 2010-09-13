@@ -37,6 +37,7 @@
                 return {
                     "addFile": function(options, fileName){
                         Generator.createPage(options, function(content){
+							console.log(content)
                             zip.add(fileName, content);
                         });
                     },
@@ -72,8 +73,8 @@
                                 "projects": data.projects,
                                 "meta": data.meta
                             },
-                            "key": ["projects", "entry"],
-                        }, "projects.html");
+                            "key": [],
+                        }, "index.html");
                         
                     }
                 }
