@@ -1,82 +1,100 @@
 <html>
     <head>
-        Web Site Generator
+        <title>Web Site Generator</title>
     </head>
     <body>
-        <a href = "javascript:Zipper.getFile()">Get Files</a>
+        <a href = "javascript:PageCreator.getFile()">Get Files</a>
+        <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.2.min.js">
+        </script>
+        <script type = "text/javascript" src="libs/jquery.tmpl.js">
+        </script>
+        <script type = "text/javascript" src="libs/jszip.js">
+        </script>
+        <script type = "text/javascript" src = "generator.js">
+        </script>
+        <script type = "text/javascript">
+            var PageCreator = (function(){
+                var zip = new JSZip();
+                var onLoadCallback = function(type){
+                    return function(data){
+                        this[type] = data;
+                        if (!this.templates || !this.pageData) {
+                            window.setTimeout(onLoadCallback, 1000);
+                            return;
+                        }
+                        PageCreator.createPages(this.templates, this.pageData);
+                    }
+                }
+                
+                var base = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/"
+                var data = {
+                    "projects": base + "od6" + "/public/values?alt=json-in-script&callback=?",
+                    "links": base + "od5" + "/public/values?alt=json-in-script&callback=?",
+                    "meta": base + "od7" + "/public/values?alt=json-in-script&callback=?",
+                    "misc": base + "od4" + "/public/values?alt=json-in-script&callback=?"
+                }
+                
+                return {
+                    "addFile": function(options, fileName){
+                        Generator.createPage(options, function(content){
+                            zip.add(fileName, content);
+                        });
+                    },
+                    "getFile": function(){
+                        location.href = "data:application/zip;base64," + zip.generate();
+                    },
+                    "init": function(){
+                        Generator.loadTemplates(["templates/header.html", "templates/project.html", "templates/footer.html"], onLoadCallback("templates"));
+                        Generator.loadData(data, onLoadCallback("pageData"));
+                    },
+                    "createPages": function(tempaltes, pageData){
+                        this.addFile({
+                            "templates": ["templates/header.html", "templates/projectList.html", "templates/footer.html"],
+                            "data": {
+                                "projects": data.projects
+                            },
+                            "key": ["projects", "entry"],
+                        }, "projects.html");
+                        
+                        for (var i = 0; i < pageData.projects.feed.entry.length; i++) {
+                            this.addFile({
+                                "templates": ["templates/header.html", "templates/project.html", "templates/footer.html"],
+                                "data": {
+                                    "projects": data.projects
+                                },
+                                "key": ["projects", "feed", "entry", i],
+                            }, "projects/" + pageData.projects.feed.entry[i].gsx$name.$t + ".html");
+                        }
+                        
+                        this.addFile({
+                            "templates": ["templates/header.html", "templates/index.html", "templates/footer.html"],
+                            "data": {
+                                "projects": data.projects,
+                                "meta": data.meta
+                            },
+                            "key": ["projects", "entry"],
+                        }, "projects.html");
+                        
+                    }
+                }
+            })();
+            
+            PageCreator.init();
+            
+            var tasks = (function(){
+                var taskDiv = $("<div>").appendTo("body");
+                var tasksLeft = 0;
+                return {
+                    "add": function(count){
+                        tasksLeft += (count || 1);
+                        taskDiv.html(tasksLeft);
+                    },
+                    "done": function(count){
+                        tasksLeft -= (count || 1);
+                        taskDiv.html(tasksLeft);
+                    }
+                }
+            })();
+        </script>
     </body>
-    <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.4.2.min.js">
-    </script>
-    <script type = "text/javascript" src="libs/jquery.tmpl.js">
-    </script>
-    <script type = "text/javascript" src="libs/jszip.js">
-    </script>
-    <script type = "text/javascript" src = "generator.js">
-    </script>
-    <script type = "text/javascript">
-        var Zipper = (function(){
-            var zip = new JSZip();
-            return {
-                "addFile": function(options, fileName){
-                    Generator.createPage(options, function(content){
-                        zip.add(fileName, content);
-                    });
-                },
-                "getFile": function(){
-                    location.href = "data:application/zip;base64," + zip.generate();
-                }
-            }
-        })();
-        
-        var tasks = (function(){
-            var taskDiv = $("<div>").appendTo("body");
-            var tasksLeft = 0;
-            return {
-                "add": function(count){
-                    tasksLeft += (count || 1);
-                    taskDiv.html(tasksLeft);
-                },
-                "done": function(count){
-                    tasksLeft -= (count || 1);
-                    taskDiv.html(tasksLeft);
-                }
-            }
-        })();
-        
-        var templates = {
-            "header": "templates/header.html",
-            "footer": "templates/footer.html",
-            "project": "templates/project.html",
-            "projectList": "templates/projectList.html",
-        };
-        
-        tasks.add(templates.length);
-        Generator.loadTemplates([templates.header, templates.footer, templates.project, templates.projectList], function(data){
-            var base = "https://spreadsheets.google.com/feeds/list/0AjGNl56NSoledHphUkM5ZV9zdnlBYjRRanl2cGxwOGc/"
-            var data = {
-                "projects": base + "od6" + "/public/values?alt=json-in-script&callback=?",
-                "links": base + "od5" + "/public/values?alt=json-in-script&callback=?",
-                "meta": base + "od7" + "/public/values?alt=json-in-script&callback=?",
-                "misc": base + "od4" + "/public/values?alt=json-in-script&callback=?"
-            }
-            tasks.done(templates.length);
-            tasks.add(data.length);
-            Generator.loadData([data.projects, data.links, data.meta, data.misc], function(results){
-                tasks.done(data.length);
-                // Project Pages
-                for (var i = 0; i < results[data.projects].feed.entry.length; i++) {
-                    Zipper.addFile({
-                        "templates": [templates.header, templates.projectList, templates.footer],
-                        "data": [data.projects],
-                        "key": ["feed", "entry", i]
-                    }, "projects/" + results[data.projects].feed.entry[i].gsx$name.$t + ".html");
-                }
-                Zipper.addFile({
-                    "templates": [templates.header, templates.projectList, templates.footer],
-                    "data": [data.projects],
-                    "key": ["feed", "entry"]
-                }, "projects.html");
-            });
-        });
-    </script>
 </html>
