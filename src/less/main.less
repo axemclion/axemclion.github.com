@@ -1,0 +1,63 @@
+body {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	font-family: 'Calibri', Helvetica, sans-serif;
+	font-size: 14px;
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li {
+			list-style: none;
+			display: inline;
+		}
+	}
+	p {
+		color: #aaa;
+		font-family: Verdana;
+	}
+	.contactme {
+		margin-bottom: 50px;
+	}
+}
+
+a{
+	text-decoration: none;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+.reddot {
+	content: '\00b7';
+	color: #f75353;
+	font-weight: bold;
+	margin: 10px;
+	line-height: 3px;
+}
+hr {
+	text-align: center;
+	width: 50%;
+	margin: 75px auto 53px;
+	color: #ccc;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	padding: 0;
+}
+h2 {
+	padding-top: 35px;
+	margin: 0 0 25px 0;
+	font-size: 38px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #777;
+}
+@import "grid.less";
+@import "hero.less";
+@import "menu.less";
+@import "profile.less";
+@import "social.less";
+@import "projects.less";
+@import "404.less";

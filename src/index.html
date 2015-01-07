@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!-- build:include partials/meta.html -->
+	<!-- /build -->
+	<title>Parashuram :: Home Page</title>
+
+	<!-- build:remove:dist -->
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	<!-- /build -->
+
+	<!-- build:template:dist
+	<style>
+	/build -->
+	<!-- build:include:dist ../bin/main.css -->
+	<!-- /build -->
+	<!-- build:template:dist
+	</style<%=String.fromCharCode(62) %>
+	/build -->
+	<!-- build:include partials/ga.html-->
+	<!-- /build -->
+<body>
+	<!-- build:include partials/hero.html -->
+	<!-- /build -->
+
+	<section class="profile">
+		<div class="pic">
+			<!-- build:[src]:dist ./ -->
+			<img src="src/media/me.png"/>
+			<!-- /build -->
+		</div>
+		<p>
+			I am also called
+			<code>axemclion</code>
+			on the internet.
+			<br/>
+			I like to work on creating simple solutions for hard problems.
+		</p>
+	</section>
+
+	<!-- build:include partials/social.html -->
+	<!-- /build -->
+
+	<!-- build:include partials/projects.html-->
+	<!-- /build -->
+
+	<hr/>
+	<div class="contactme" id="contact">
+		Contact me :
+		<a href="contact.html">Email</a>
+		|
+		<a href="https://twitter.com/intent/tweet?text=@nparashuram">Twitter</a>
+	</div>
+
+	<!-- build:include partials/menu.html-->
+	<!-- /build -->
+
+</body>
+</html>

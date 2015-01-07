@@ -1,0 +1,54 @@
+.hero {
+	font-family: 'Calibri', Helvetica, sans-serif;
+	color: #777;
+	margin-top: 30px;
+	.greeting {
+		color: #bbb;
+		font-size: 16px;
+		display: block;
+		margin-top: 88px;
+		text-transform: uppercase;
+		&:before, &:after {
+			content: '';
+			padding: 0px 30px;
+			border-top: SOLID 1px #ccc;
+			margin: 10px 10px;
+			position: relative;
+			top: 11px;
+			@media(max-width:500px){
+				padding: 0px 5px;
+			}
+		}
+	}
+	h1 {
+		@media(max-width:500px){
+			font-size: 50px;
+		}
+		font-size: 75px;
+		font-weight: 500;
+		margin: 4px;
+	}
+	h2 {
+		@media(max-width:500px){
+			font-size: 20px;
+		}
+		font-size: 24px;
+		font-weight: lighter;
+		margin: 23px 0 0 0;
+		padding: 0;
+		text-transform: none;
+		li {
+			margin: 0 -3px;
+			&:first-child {
+				&:after {
+					.reddot;
+				}
+			}
+			&:last-child {
+				&:before {
+					.reddot;
+				}
+			}
+		}
+	}
+}
