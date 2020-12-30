@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="image/vnd.microsoft.icon" rel="icon" href="/favicon.ico" />
+    <link rel="me" href="http://nparashuram.com" />
+    <link rel="canonical" href="http://nparashuram.com" />
+    <meta name="theme-color" content="#fff" />
+    <link rel="icon" sizes="369x369" href="me.png" />
+    <title>.</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: "Calibri", Helvetica, sans-serif;
+        font-size: 14px;
+      }
+      .root {
+        margin-right: auto;
+        margin-left: auto;
+        box-sizing: border-box;
+        padding: 15px;
+      }
+      .card {
+        width: 48%;
+        margin: 1%;
+        overflow: hidden;
+        display: inline-block;
+        min-height: 150px;
+        background: #f9f9f9;
+        overflow: hidden;
+        box-shadow: 0 0 2px #ddd, inset 0 1px 2px #fff;
+      }
+      @media (max-width: 992px) {
+        .card {
+          width: 98%;
+        }
+      }
+
+      .card img {
+        width: 100%;
+      }
+
+      button {
+        width: 98%;
+        display: block;
+        margin: 1%;
+        padding: 1%;
+      }
+    </style>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-617499-11"]),
+        _gaq.push(["_setDomainName", "github.com"]),
+        _gaq.push(["_setAllowLinker", !0]),
+        _gaq.push(["_trackPageview"]),
+        (function () {
+          var t = document.createElement("script");
+          (t.type = "text/javascript"),
+            (t.async = !0),
+            (t.src =
+              ("https:" == document.location.protocol
+                ? "https://ssl"
+                : "http://www") + ".google-analytics.com/ga.js");
+          var e = document.getElementsByTagName("script")[0];
+          e.parentNode.insertBefore(t, e);
+        })();
+    </script>
+    <body>
+      <div class="root"></div>
+      <button id="edit">Edit</button>
+      <script type="text/javascript">
+        let imgs = window.localStorage.getItem("images");
+        if (imgs === null) {
+          imgs = "[200, 201, 203]";
+        }
+        document.getElementById("edit").addEventListener(
+          "click",
+          function () {
+            window.localStorage.setItem(
+              "images",
+              window.prompt("", imgs || "")
+            );
+            window.location.reload();
+          },
+          false
+        );
+        document.getElementsByClassName("root")[0].innerHTML = JSON.parse(imgs)
+          .map(
+            (x) =>
+              `<div class="card"><img src="http://192.168.1.${x}/img/video.mjpeg" /></div>`
+          )
+          .join("");
+      </script>
+    </body>
+  </head>
+</html>
