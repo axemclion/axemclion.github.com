@@ -93,7 +93,11 @@
         document.getElementsByClassName("root")[0].innerHTML = JSON.parse(imgs)
           .map(
             (x) =>
-              `<div class="card"><img src="http://192.168.1.${x}/img/video.mjpeg" /></div>`
+              `<div class="card">
+                <a href="http://192.168.1.${x}/img/video.mjpeg">
+                    <img src="http://192.168.1.${x}/img/video.mjpeg" />
+                </a>
+               </div>`
           )
           .join("");
       </script>
