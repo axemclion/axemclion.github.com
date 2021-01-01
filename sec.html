@@ -26,17 +26,28 @@
         box-sizing: border-box;
         padding: 15px;
       }
-      .root iframe {
-        display: block;
-        width: 640px;
-        height: 480px;
+      .card {
+        width: 48%;
+        margin: 1%;
         overflow: hidden;
-        border: none;
+        display: inline-block;
+        min-height: 150px;
+        background: #f9f9f9;
+        overflow: hidden;
+        box-shadow: 0 0 2px #ddd, inset 0 1px 2px #fff;
+      }
+      @media (max-width: 992px) {
+        .card {
+          width: 98%;
+        }
+      }
+
+      .card img {
+        width: 100%;
       }
 
       button {
-        width: 98%;
-        display: block;
+        display: inline-block;
         margin: 1%;
         padding: 1%;
       }
@@ -63,27 +74,30 @@
       <div class="root"></div>
       <button id="edit">Edit</button>
       <script type="text/javascript">
+        let imgs = window.localStorage.getItem("images");
+        if (imgs === null) {
+          imgs = JSON.stringify([201, 202, 203]);
+          window.localStorage.setItem(imgs);
+        }
         document.getElementById("edit").addEventListener(
           "click",
           function () {
-            window.localStorage.setItem(
-              "images",
-              window.prompt("", imgs || "")
-            );
-            window.location.reload();
+            const answer = window.prompt("", imgs || "");
+            if (answer) {
+              window.localStorage.setItem("images", answer);
+              window.location.reload();
+            }
           },
           false
         );
-
-        let imgs = window.localStorage.getItem("images");
-        if (imgs === null) {
-          imgs = JSON.stringify(["201", "202", "203"]);
-        }
-
         document.getElementsByClassName("root")[0].innerHTML = JSON.parse(imgs)
           .map(
             (x) =>
-              `<iframe class='card' width="640" referrerpolicy="no-referrer" height="480" src='http://192.168.1.${x}/img/video.mjpeg'></iframe>`
+              `<div class="card">
+                <a href="http://192.168.1.${x}/img/video.mjpeg">
+                    <img src="http://192.168.1.${x}/img/video.mjpeg" />
+                </a>
+               </div>`
           )
           .join("");
       </script>
