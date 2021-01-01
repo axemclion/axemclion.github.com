@@ -26,24 +26,12 @@
         box-sizing: border-box;
         padding: 15px;
       }
-      .card {
-        width: 48%;
-        margin: 1%;
+      .root iframe {
+        display: block;
+        width: 640px;
+        height: 480px;
         overflow: hidden;
-        display: inline-block;
-        min-height: 150px;
-        background: #f9f9f9;
-        overflow: hidden;
-        box-shadow: 0 0 2px #ddd, inset 0 1px 2px #fff;
-      }
-      @media (max-width: 992px) {
-        .card {
-          width: 98%;
-        }
-      }
-
-      .card img {
-        width: 100%;
+        border: none;
       }
 
       button {
@@ -75,10 +63,6 @@
       <div class="root"></div>
       <button id="edit">Edit</button>
       <script type="text/javascript">
-        let imgs = window.localStorage.getItem("images");
-        if (imgs === null) {
-          imgs = "[200, 201, 203]";
-        }
         document.getElementById("edit").addEventListener(
           "click",
           function () {
@@ -90,14 +74,16 @@
           },
           false
         );
+
+        let imgs = window.localStorage.getItem("images");
+        if (imgs === null) {
+          imgs = JSON.stringify(["201", "202", "203"]);
+        }
+
         document.getElementsByClassName("root")[0].innerHTML = JSON.parse(imgs)
           .map(
             (x) =>
-              `<div class="card">
-                <a href="http://192.168.1.${x}/img/video.mjpeg">
-                    <img src="http://192.168.1.${x}/img/video.mjpeg" />
-                </a>
-               </div>`
+              `<iframe class='card' width="640" referrerpolicy="no-referrer" height="480" src='http://192.168.1.${x}/img/video.mjpeg'></iframe>`
           )
           .join("");
       </script>
