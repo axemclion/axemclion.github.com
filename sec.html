@@ -77,7 +77,6 @@
         let imgs = window.localStorage.getItem("images");
         if (imgs === null) {
           imgs = JSON.stringify([201, 202, 203]);
-          window.localStorage.setItem(imgs);
         }
         document.getElementById("edit").addEventListener(
           "click",
