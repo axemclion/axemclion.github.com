@@ -25,7 +25,8 @@ h2 { margin: 0 0 25px 0; padding-top: 35px; font-size: 38px; font-weight: bold; 
 
 /* profile */
 .pic { width: 256px; height: 256px; margin: 35px auto 0; border: 3px solid #777; overflow: hidden; }
-.pic img { display: block; }
+.pic a { display: block; }
+.pic img { display: block; border: 0; }
 .profile p { margin: 20px 0 0 0; font-size: 14px; line-height: 25px; }
 
 /* social buttons */
