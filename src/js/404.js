@@ -4,7 +4,6 @@ var redirects = {
 	'/IndexedDB/LINQ/': '/Linq2IndexedDB/',
 	'/ttd/IndexedDB/': '/IndexedDB//trialtool/',
 	'/ttd/firefox/': '/IndexedDB/trialtool/',
-	'/metrialtool': '/projects/metrialtool.html', // TODO - FIX THIS
 
 	'/misc.html': '#misc',
 	'/about.html': '#about',

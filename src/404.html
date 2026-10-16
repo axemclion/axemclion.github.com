@@ -1,45 +1,21 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
 <head>
-	<!-- build:include partials/meta.html -->
-	<!-- /build -->
-	<title>About Parashuram</title>
-
-	<!-- build:remove:dist -->
-	<link rel="stylesheet" type="text/css" href="main.css"/>
-	<!-- /build -->
-
-	<!-- build:template:dist
-	<style>
-	/build -->
-	<!-- build:include:dist ../bin/main.css -->
-	<!-- /build -->
-	<!-- build:template:dist
-	</style<%=String.fromCharCode(62) %>
-	/build -->
-	<!-- build:include partials/ga.html-->
-	<!-- /build -->
+<!--@include partials/head.html-->
+<title>About Parashuram</title>
+<!--@css-->
+</head>
 <body>
-	<!-- build:include partials/hero.html -->
-	<!-- /build -->
-	<div class="error-not-found">
-		<hr/>
-		<div class="error-sign">
-			<h2>404</h2>
-		</div>
-		<h3>Could not find the page your were looking for :(</h3>
-	</div>
+<!--@include partials/hero.html-->
 
-	<hr/>
-	<div class="contactme" id="contact">
-		Contact me :
-		<a href="contact.html">Email</a>
-		|
-		<a href="https://twitter.com/intent/tweet?text=@nparashuram">Twitter</a>
-	</div>
-	<script type="text/javascript">
-	//<!-- build:include js/404.js-->
-	//<!-- /build -->
-	</script>
+<div class="error-not-found">
+	<hr>
+	<div class="error-sign"><h2>404</h2></div>
+	<h3>Could not find the page your were looking for :(</h3>
+</div>
+
+<!--@include partials/footer.html-->
+<!--@js js/404.js-->
+<!--@include partials/ga.html-->
 </body>
 </html>

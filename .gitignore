@@ -1,6 +1,4 @@
 node_modules/
-.project
-.c9revisions
+dist/
+.baseline/
 .DS_Store
-bower_components/
-bin/
