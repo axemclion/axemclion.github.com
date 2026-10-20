@@ -26,8 +26,8 @@ const esc = (v) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, 
 
 function expand(html) {
   html = html.replace(/<!--@include (\S+)\s*-->/g, (_, p) => expand(read(p)));
-  html = html.replace(/<!--@css-->/g, () => '<style type="text/css">\n' + minifyCss(read('css/main.css')) + '\n</style>');
-  html = html.replace(/<!--@js (\S+)\s*-->/g, (_, p) => '<script type="text/javascript">\n' + minifyJs(read(p)) + '\n</script>');
+  html = html.replace(/<!--@css-->/g, () => '<style>\n' + minifyCss(read('css/main.css')) + '\n</style>');
+  html = html.replace(/<!--@js (\S+)\s*-->/g, (_, p) => '<script>\n' + minifyJs(read(p)) + '\n</script>');
   return html;
 }
 
@@ -49,7 +49,8 @@ function minifyHtml(html) {
   return html.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>)/g).map((part, i) => i % 2 ? part : part
     .replace(/<!--(?!\[if)[\s\S]*?-->/g, '')
     .replace(/^[ \t]+/gm, '')
-    .replace(/\n{2,}/g, '\n')).join('').replace(/^\n+/, '');
+    .replace(/\n{2,}/g, '\n')
+    .replace(/<\/li>\s+<li/g, '</li><li')).join('').replace(/^\n+/, '');
 }
 
 function render(file, minify) {

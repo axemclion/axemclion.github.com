@@ -3,88 +3,99 @@
  * fonts) so the page is fully usable in 2005-era browsers (IE6, Firefox 1.5,
  * Safari 2, Opera 8). Do not put anything newer in this layer.
  */
-body { margin: 0; padding: 0; text-align: center; font-family: Calibri, Helvetica, Arial, sans-serif; font-size: 14px; background: #fff; }
-ul { list-style: none; margin: 0; padding: 0; }
-li { list-style: none; display: inline; }
-p { color: #aaa; font-family: Verdana, Arial, sans-serif; }
-a { text-decoration: none; }
+body { margin: 0; font: 14px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #14181f; background: #eceef0; }
+ul { margin: 0; padding: 0; }
+li { display: inline; margin: 0 7px; list-style: none; }
+h1, h2, p { margin: 0; }
+a { color: #14181f; text-decoration: none; }
 a:hover { text-decoration: underline; }
-.contactme { margin-bottom: 50px; }
 
-hr { width: 50%; height: 1px; margin: 75px auto 53px; padding: 0; border: 0; border-top: 1px solid #ccc; color: #ccc; text-align: center; }
-h2 { margin: 0 0 25px 0; padding-top: 35px; font-size: 38px; font-weight: bold; text-transform: uppercase; color: #777; }
-.project-card h3 { color: #777; }
+/* hero: black band, everything centred */
+.hero { padding: 52px 24px 44px; text-align: center; color: #f2f0ea; background: #101014; }
+.pic { width: 256px; height: 256px; margin: 28px auto 0; border: 3px solid #777; overflow: hidden; }
+.pic a, .pic img { display: block; border: 0; }
+.greeting { display: block; font-size: 11px; font-weight: bold; text-transform: uppercase; color: #8b887f; }
+.hero h1 { margin-top: 8px; font-size: 52px; line-height: 1; }
+.roles { margin-top: 16px; font-size: 16px; font-weight: bold; color: #edebe6; }
+.aka { margin-top: 24px; line-height: 22px; color: #8b887f; }
+.aka code { color: #f2f0ea; }
+.links { margin-top: 22px; font-size: 18px; font-weight: bold; }
+.hero a { color: #f2f0ea; }
+.links2 { margin-top: 12px; font-size: 13px; color: #8b887f; }
+.links2 a { font-weight: bold; color: #c9c6bd; }
 
-/* hero */
-.hero { margin-top: 30px; color: #777; }
-.hero .greeting { display: block; margin-top: 88px; font-size: 16px; text-transform: uppercase; color: #bbb; }
-.hero h1 { margin: 4px; font-size: 75px; font-weight: normal; }
-.roles { margin: 23px 0 0 0; padding: 0; font-size: 24px; }
-.roles li { margin: 0; }
-.roles .dot { margin: 0 10px; font-weight: bold; color: #f75353; }
+/* content column */
+.wrap { width: 760px; max-width: 100%; margin: 0 auto; padding: 40px 30px 34px; }
+.entries { overflow: hidden; }
+.entry { float: left; width: 48%; padding-bottom: 20px; border-bottom: 1px solid #ccc; }
+.entry + .entry { margin-left: 4%; }
+h2 { font-size: 22px; }
+.entry p, .card p { margin: 6px 0 14px; line-height: 22px; color: #5a6b7e; }
+.entry a { font-size: 13px; font-weight: bold; }
 
-/* profile */
-.pic { width: 256px; height: 256px; margin: 35px auto 0; border: 3px solid #777; overflow: hidden; }
-.pic a { display: block; }
-.pic img { display: block; border: 0; }
-.profile p { margin: 20px 0 0 0; font-size: 14px; line-height: 25px; }
+/* project cards */
+.projects { clear: both; padding-top: 26px; }
+.card { display: block; position: relative; margin-bottom: 14px; padding: 24px 28px; border: 1px solid #dde0e4; background: #fff; }
+.card:hover { text-decoration: none; }
+.card h2 { font-size: 20px; }
+.card p { margin: 6px 0 0; }
+.go { position: absolute; top: 24px; right: 28px; font-size: 19px; color: #8b99a9; }
+.pill { display: block; margin-top: 10px; font-size: 12px; font-weight: bold; }
 
-/* social buttons */
-.social { margin: 35px 0 0 0; }
-.social li { display: inline-block; margin: 0 3px; padding: 5px 8px; }
-.social li a { font-size: 13px; color: #fff; text-decoration: none; }
-.social .green { background: #51d466; }
-.social .yellow { background: #f7a253; }
-.social .blue { background: #32c8de; }
-.social .red { background: #f75353; }
+.foot { margin-top: 38px; padding-top: 16px; border-top: 1px solid #ccc; font-size: 13px; }
+.foot a { font-weight: bold; color: #5a6b7e; }
 
-/* projects: three columns of floats, clearing via overflow */
-.projects .cards { width: 90%; margin: 45px auto 0; overflow: hidden; }
-.projects .col { float: left; width: 33%; }
-.project-card { display: block; margin: 15px; padding: 15px; min-height: 150px; border: 1px solid #ddd; background: #f9f9f9; }
-.project-card:hover { text-decoration: none; }
-.project-card p { font-size: 14px; }
-.misc { width: 90%; margin: 0 auto; }
-
-/* top menu: an ordinary block at the bottom of the page in old browsers */
-.top-menu { margin: 0 0 30px 0; font-size: 11px; line-height: 25px; }
-.top-menu ul { width: 500px; margin: auto; padding: 3px; border: 1px solid #ccc; background: #fff; font-family: Verdana, Arial, sans-serif; text-transform: uppercase; }
-.top-menu li { margin: 0 9px; }
-.top-menu a { color: #999; }
+/* contact form */
+.form { display: block; width: 100%; height: 700px; border: 0; }
 
 /* 404 */
-.error-sign { width: 100px; height: 100px; margin: 0 auto 50px; border: 2px solid #333; background: #ff0; }
-.error-sign h2 { color: #333; }
+.error { text-align: center; }
+.error h2 { font-size: 52px; }
+.error p { margin-top: 10px; font-size: 16px; color: #5a6b7e; }
 
 /*
  * Layer 2 - modern. Everything here is skipped by browsers that do not
- * understand it (media queries and CSS3 properties).
+ * understand it (CSS3 properties, gradients, grid, flexbox, media queries).
  */
+body { -webkit-font-smoothing: antialiased; font-family: system-ui, sans-serif; }
+.hero {
+	background-image:
+		repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 2px, transparent 2px 30px),
+		repeating-linear-gradient(-45deg, rgba(255,255,255,.045) 0 2px, transparent 2px 30px);
+}
 .pic, .pic img { border-radius: 50%; }
-.pic { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
-.project-card { border-radius: 3px; box-shadow: 0 0 2px #ddd, inset 0 1px 2px #fff; }
-.top-menu ul { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
-.hero .greeting:before, .hero .greeting:after { content: ''; position: relative; top: 11px; margin: 10px; padding: 0 30px; border-top: 1px solid #ccc; }
-.hero h1 { font-weight: 500; }
-.roles { font-weight: lighter; }
-.error-sign { border-radius: 5px; box-shadow: 0 0 5px #ff0; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
-.error-sign h2 { -webkit-transform: rotate(-45deg) translate(-6px, -10px); transform: rotate(-45deg) translate(-6px, -10px); }
+.pic { border-color: rgba(255,255,255,.35); box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.pic img { object-fit: cover; }
+.greeting { font-size: 11.5px; letter-spacing: .3em; }
+.hero h1 { font-weight: 800; letter-spacing: -.03em; }
+.roles, .links { font-weight: 600; }
+.roles { font-size: 16.5px; }
+.aka code { font-family: ui-monospace, monospace; }
+.links2 a { font-weight: 600; }
+.roles li, .links li { margin: 0; }
+.roles li + li:before, .links li + li:before { content: "\00b7"; margin: 0 7px; color: #8b887f; }
+.links li + li:before { margin: 0 9px; color: #5e5c55; }
+.wrap { width: auto; max-width: 820px; box-sizing: border-box; }
+.entries { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.entry, .entry + .entry { float: none; width: auto; margin: 0; padding: 6px 2px 20px; border-color: rgba(18,35,58,.16); }
+.entry h2 { font-weight: 800; letter-spacing: -.01em; }
+.entry p, .card p { font-size: 14.5px; line-height: 1.55; }
+.entry a { font-size: 13.5px; font-weight: 700; }
+.projects { display: grid; gap: 14px; margin-top: 26px; padding: 0; }
+.card { display: flex; align-items: center; justify-content: space-between; margin: 0; border-color: rgba(18,35,58,.13); border-radius: 16px; box-shadow: 0 2px 10px rgba(18,35,58,.05); }
+.card h2 { font-weight: 750; white-space: nowrap; }
+.card p { font-size: 14px; }
+.go, .pill { position: static; flex: none; margin: 0 0 0 16px; }
+.pill { padding: 5px 12px; border-radius: 99px; background: rgba(18,35,58,.07); font-size: 12.5px; font-weight: 700; }
+.foot { border-color: rgba(18,35,58,.14); }
+.foot a { font-weight: 600; }
 
-@media screen and (min-width: 500px) {
-	.top-menu { position: fixed; top: -1px; width: 100%; margin: 0; }
-}
-@media screen and (min-width: 992px) {
-	.projects .cards { width: 970px; }
-}
-@media screen and (max-width: 767px) {
-	.projects .col { float: none; width: auto; }
-}
-@media screen and (max-width: 499px) {
-	.top-menu { display: none; }
-}
-@media screen and (max-width: 500px) {
-	.roles .dot { margin: 0 5px; }
-	.hero .greeting:before, .hero .greeting:after { padding: 0 5px; }
-	.hero h1 { font-size: 50px; }
-	.roles { font-size: 20px; }
+@media screen and (max-width: 760px) {
+	.hero { padding: 38px 20px 32px; }
+	.pic, .pic img { width: 172px; height: 172px; }
+	.hero h1 { font-size: 38px; }
+	.roles { font-size: 15px; }
+	.wrap { padding: 28px 18px 24px; }
+	.entries { grid-template-columns: 1fr; gap: 20px; }
+	.card { padding: 20px 22px; }
 }
